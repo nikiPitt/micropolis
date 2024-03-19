@@ -1,0 +1,45 @@
+Debugging Notes
+March 18, 2024
+Nik Kim
+
+A. Messaging about Residential Zones
+- The message string is poorly written.
+- Utilized IntelliJ IDEA's powerful search tool.
+- The file format, cityMessages.properties, intrigued me. I wonder about its .utf8 format and how it's loaded and used in other files.
+- Spent 2 minutes searching for how to use the search tool in IntelliJ IDEA.
+- Referenced JetBrains IntelliJ IDEA Documentation.
+
+B. Game Starts in January 1800
+- The year is mistakenly set to 1800.
+- Used IntelliJ IDEA's powerful search tool to locate the error.
+- The error was obvious.
+- Spent 2 minutes.
+- Referenced JetBrains IntelliJ IDEA Documentation.
+
+C. Rubble is not Bulldozable
+- Rubble tile cannot be bulldozed.
+- The Rubble tile is not set to be bulldozable.
+- Initiated the search from the Micropolis.java file using the keyword "Bulldozer". Identified the isTileDozable method and traced back to the tiles.rc file where tile properties are organized. Modified the Rubble tile to be bulldozable in the file.
+- Spent 30 minutes.
+- Referenced JetBrains IntelliJ IDEA Documentation.
+
+D. Fire Station turns into Police Station
+- After a certain amount of time, the fire station suddenly changes into a police station.
+- Used search tool and Ctrl + F.
+- Started from the Micropolis.java file, searched for the keyword "fire". Found the initTileBehaviors() method suspicious. Upon inspection, found the repairZone method in the MapScanner class setting the parameter to POLICESTATION instead of FIRESTATION. Corrected the parameter to FIRESTATION, resolving the issue.
+- Spent 10 minutes.
+- Referenced JetBrains IntelliJ IDEA Documentation.
+
+E. Flooding not limited to water's edge
+- Flood disasters occur beyond the areas near rivers.
+- Used search tool and Ctrl + F.
+- Began from the Micropolis.java file, searched for the keyword "flood". Identified the makeFlood() method, which checks if the area is floodable. Traced back to the TileConstraints.java file defining isFloodable, which returned DIRT tile or tiles that are bulldozable and combustible. Adjusted the code to return tiles located at river edges instead.
+- Spent 30 minutes.
+- Referenced JetBrains IntelliJ IDEA Documentation.
+
+F. Building underwater wires costs the wrong amount
+- Building underwater wires incurs incorrect costs.
+- Used search tool and Ctrl + F.
+- Discovered in the RoadLikeTool.java class that UNDERWATER_WIRE_COST is defined but not utilized. Modified the cost in the layWire method for cases RIVER, EDGE, AND CHANNEL to use UNDERWATER_WIRE_COST.
+- Spent 15 minutes.
+- Referenced JetBrains IntelliJ IDEA Documentation.
