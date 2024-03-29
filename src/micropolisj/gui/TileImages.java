@@ -67,7 +67,6 @@ public class TileImages
 				0, i * srcSize,
 				0 + srcSize, i * srcSize + srcSize,
 				null);
-			
 			images[i] = bi;
 		}
 		return images;

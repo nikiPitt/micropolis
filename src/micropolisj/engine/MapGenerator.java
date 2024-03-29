@@ -479,7 +479,15 @@ public class MapGenerator
 
 			if ((map[mapY][mapX] & LOMASK) == DIRT)
 			{
-				map[mapY][mapX] = WOODS;
+				int randomNum = (int) (Math.random() * 10);
+				// 10% of WOODS tiles will turn into MINE tiles
+				if (randomNum != 9) {
+					map[mapY][mapX] = WOODS;
+				}
+				else {
+					// if randomNum == 9 then it will become a MINE tile
+					map[mapY][mapX] = MINE;
+				}
 			}
 		}
 	}

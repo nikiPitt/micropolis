@@ -106,6 +106,8 @@ class ToolEffect implements ToolEffectIfc
 			city.spend(preview.cost);
 			return ToolResult.SUCCESS;
 		}
+
+
 		else {
 			return preview.toolResult;
 		}

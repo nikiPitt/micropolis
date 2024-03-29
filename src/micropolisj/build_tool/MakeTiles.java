@@ -31,6 +31,8 @@ public class MakeTiles
 			throw new Exception("Wrong number of arguments");
 		}
 		if (System.getProperty("complete_batch") != null) {
+			System.out.println("Im here~");
+			// Currently, doesn't go inside this method
 			//Make all the appropriate "tiles.png" images
 			File recipeFile = new File(args[0]);
 			File outputDir = new File(args[1]);
@@ -72,6 +74,7 @@ public class MakeTiles
 	static void generateFromRecipe(File recipeFile, File outputDir)
 		throws IOException
 	{
+		//System.out.println("generate from recipe");
 		Properties recipe = new Properties();
 		recipe.load(
 			new InputStreamReader(

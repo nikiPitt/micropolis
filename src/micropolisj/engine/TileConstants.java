@@ -45,6 +45,7 @@ public class TileConstants
 	static final char RIVEDGE = 5;
 	static final char FIRSTRIVEDGE = 5;
 	static final char LASTRIVEDGE = 20;
+	static final char MINE = 960;
 	static final char TREEBASE = 21;
 	static final char WOODS_LOW = TREEBASE;
 	static final char WOODS = 37;
@@ -150,7 +151,7 @@ public class TileConstants
 	static final char VBRDG1 = 949;
 	static final char VBRDG2 = 950;
 	static final char VBRDG3 = 951;
-	public static final char LAST_TILE = 956;
+	public static final char LAST_TILE = 960;
 
 	static final char [] RoadTable = new char[] {
 		ROADS, ROADS2, ROADS, ROADS3,
@@ -333,6 +334,13 @@ public class TileConstants
 
 		return ((tile >= WOODS_LOW) &&
 			(tile <= WOODS_HIGH));
+	}
+
+	public static boolean isMine(int tile)
+	{
+		assert (tile & LOMASK) == tile;
+
+		return (tile == 960);
 	}
 
 	//used by makeEarthquake

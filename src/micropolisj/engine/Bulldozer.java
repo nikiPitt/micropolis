@@ -94,6 +94,11 @@ class Bulldozer extends ToolStroke
 
 		fixZone(eff);
 		eff.spend(1);
+
+		if (isMine(tile)) {
+			city.budget.totalFunds += 500;
+		}
+
 		return;
 	}
 
