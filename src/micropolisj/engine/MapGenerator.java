@@ -76,6 +76,8 @@ public class MapGenerator
 
 	int lakeLevel = -1; //level for lake creation; -1==auto, 0==none, >0==level
 
+	int mineLevel = -1; //level for mine creation; -1==auto, 0==none, >0==level
+
 	void generateMap(long r)
 	{
 		PRNG = new Random(r);
@@ -116,6 +118,11 @@ public class MapGenerator
 		{
 			doTrees();
 		}
+
+		if (mineLevel != 0)
+		{
+			doMine();
+		}
 	}
 
 	private void makeIsland()
@@ -123,6 +130,7 @@ public class MapGenerator
 		makeNakedIsland();
 		smoothRiver();
 		doTrees();
+		doMine();
 	}
 
 	private int erand(int limit)
@@ -479,18 +487,75 @@ public class MapGenerator
 
 			if ((map[mapY][mapX] & LOMASK) == DIRT)
 			{
-				int randomNum = (int) (Math.random() * 10);
-				// 10% of WOODS tiles will turn into MINE tiles
-				if (randomNum != 9) {
-					map[mapY][mapX] = WOODS;
-				}
-				else {
-					// if randomNum == 9 then it will become a MINE tile
-					map[mapY][mapX] = MINE;
-				}
+				map[mapY][mapX] = WOODS;
 			}
 		}
 	}
+
+	private void doMine()
+	{
+		int amount;
+
+		if (mineLevel < 0)
+		{
+			amount = PRNG.nextInt(101) + 40;
+		}
+		else
+		{
+			amount = mineLevel + 3;
+		}
+
+		for (int x = 0; x < amount; x++)
+		{
+			int xloc = PRNG.nextInt(getWidth());
+			int yloc = PRNG.nextInt(getHeight());
+			mineSplash(xloc, yloc);
+			// check if the location is soil
+		}
+	}
+
+	private void mineSplash(int xloc, int yloc)
+	{
+		int dis;
+		if (mineLevel < 0)
+		{
+			dis = PRNG.nextInt(11) + 20;
+		}
+		else
+		{
+			dis = PRNG.nextInt(101 + (treeLevel*2)) + 20;
+		}
+
+		mapX = xloc;
+		mapY = yloc;
+
+		for (int z = 0; z < dis; z++)
+		{
+			int dir = PRNG.nextInt(8);
+			moveMap(dir);
+
+			if (!engine.testBounds(mapX, mapY))
+				return;
+
+			if ((map[mapY][mapX] & LOMASK) == DIRT)
+			{
+				int randIdx = PRNG.nextInt(4);
+				char mine = MINE1;
+				switch(randIdx) {
+					case 0: mine = MINE1;
+							break;
+					case 1: mine = MINE2;
+							break;
+					case 2: mine = MINE3;
+							break;
+					case 3: mine = MINE4;
+							break;
+				}
+				map[mapY][mapX] = mine;
+			}
+		}
+	}
+
 
 	static final int [] DIRECTION_TABX = new int[] {  0,  1,  1,  1,  0, -1, -1, -1 };
 	static final int [] DIRECTION_TABY = new int[] { -1, -1,  0,  1,  1,  1,  0, -1 };

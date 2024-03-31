@@ -45,7 +45,10 @@ public class TileConstants
 	static final char RIVEDGE = 5;
 	static final char FIRSTRIVEDGE = 5;
 	static final char LASTRIVEDGE = 20;
-	static final char MINE = 960;
+	static final char MINE1 = 960;
+	static final char MINE2 = 961;
+	static final char MINE3 = 962;
+	static final char MINE4 = 963;
 	static final char TREEBASE = 21;
 	static final char WOODS_LOW = TREEBASE;
 	static final char WOODS = 37;
@@ -340,7 +343,7 @@ public class TileConstants
 	{
 		assert (tile & LOMASK) == tile;
 
-		return (tile == 960);
+		return (tile >= 960 && tile <= 963);
 	}
 
 	//used by makeEarthquake
