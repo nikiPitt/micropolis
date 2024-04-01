@@ -339,11 +339,21 @@ public class TileConstants
 			(tile <= WOODS_HIGH));
 	}
 
-	public static boolean isMine(int tile)
+	public static int isMine(int tile)
 	{
 		assert (tile & LOMASK) == tile;
 
-		return (tile >= 960 && tile <= 963);
+		if (tile == 960) {
+			return 0;
+		} else if (tile == 961) {
+			return 1;
+		} else if (tile == 962) {
+			return 2;
+		} else if (tile == 963) {
+			return 3;
+		} else {
+			return -1;
+		}
 	}
 
 	//used by makeEarthquake

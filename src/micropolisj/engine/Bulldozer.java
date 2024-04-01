@@ -95,11 +95,17 @@ class Bulldozer extends ToolStroke
 		fixZone(eff);
 		eff.spend(1);
 
-		if (isMine(tile)) {
-			city.budget.totalFunds += 500;
-		}
+		int isMine = isMine(tile);
 
-		return;
+		switch (isMine) {
+			case 0: city.budget.totalFunds += 100;
+					break;
+			case 1: city.budget.totalFunds += 300;
+					break;
+			case 2: city.budget.totalFunds += 500;
+					break;
+			case 3: city.budget.totalFunds += 1000;
+		}
 	}
 
 	void putRubble(ToolEffectIfc eff, int w, int h)

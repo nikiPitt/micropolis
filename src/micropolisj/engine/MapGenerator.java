@@ -539,18 +539,18 @@ public class MapGenerator
 
 			if ((map[mapY][mapX] & LOMASK) == DIRT)
 			{
-				int randIdx = PRNG.nextInt(4);
+				int randIdx = PRNG.nextInt(10);
 				char mine = MINE1;
-				switch(randIdx) {
-					case 0: mine = MINE1;
-							break;
-					case 1: mine = MINE2;
-							break;
-					case 2: mine = MINE3;
-							break;
-					case 3: mine = MINE4;
-							break;
+				if (randIdx < 4) {
+					mine = MINE1;
+				} else if (randIdx >=4 && randIdx < 7) {
+					mine = MINE2;
+				} else if (randIdx >=7 && randIdx < 9) {
+					mine = MINE3;
+				} else if (randIdx == 9) {
+					mine = MINE4;
 				}
+
 				map[mapY][mapX] = mine;
 			}
 		}
